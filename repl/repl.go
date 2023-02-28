@@ -31,14 +31,14 @@ func Start(in io.Reader, out io.Writer) {
 		program := p.ParseProgram()
 		errors := p.Errors()
 		if len(errors) > 0 {
-			fmt.Fprintf(out, "parser has %d errors\n", len(errors))
+			fmt.Printf("parser has %d errors\n", len(errors))
 			for _, msg := range errors {
-				fmt.Fprintf(out, "parser errors :%q\n", msg)
+				fmt.Printf("parser errors :%q\n", msg)
 			}
 		} else {
-			for i := range program.Statements {
-				stmt := program.Statements[i]
-				fmt.Printf("Statement %d is {%q}.\n", i, stmt.TokenLiteral())
+			fmt.Print(program.String() + "\n")
+			for _, stmt := range program.Statements {
+				fmt.Printf("statement %q\n", stmt.TokenLiteral())
 			}
 		}
 	}
